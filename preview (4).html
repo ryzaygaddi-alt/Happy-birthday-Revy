@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Revy 🎀</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    overflow: hidden;
+    text-align: center;
+
+    background: linear-gradient(270deg, #ffd6e7, #ffe6f0, #fff0f5);
+    background-size: 600% 600%;
+    animation: bgMove 10s ease infinite;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1 {
+    margin-top: 60px;
+    color: #ff3399;
+    font-size: 2.2em;
+}
+
+.glitter {
+    font-size: 3em;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ff66b2, #fff, #ff66b2);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: sparkle 2s linear infinite;
+}
+
+@keyframes sparkle {
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
+}
+
+button {
+    padding: 14px 24px;
+    font-size: 16px;
+    background-color: #ff66b2;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    font-family: 'Fredoka', sans-serif;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* Popup styled for phone */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    width: 90%;
+    max-width: 380px;
+    height: auto;
+
+    /* Pink hearts background */
+    background: #fff0f5;
+    background-image: radial-gradient(#ff99cc 10%, transparent 11%);
+    background-size: 30px 30px;
+
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    z-index: 10;
+    animation: popIn 0.4s forwards;
+}
+
+@keyframes popIn {
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.popup h2 {
+    color: #ff3399;
+}
+
+.popup p {
+    font-size: 15px;
+    color: #444;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    color: #ff80bf;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Music -->
+<audio id="music" loop>
+    <source src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.mid" type="audio/midi">
+</audio>
+
+<h1>🎀 Happy 40th Birthday 🎀</h1>
+<div class="glitter">Revy ✨</div>
+
+<br><br>
+<button onclick="surprise()">Tap for a Surprise 💖</button>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+    <h2>💗 You're Amazing 💗</h2>
+    <p>
+        Happy 40th Birthday, Revy! 🎉<br><br>
+
+        You are one of the strongest and most hardworking people I know.  
+        No matter what life brings, you face it with courage and determination.  
+        <br><br>
+
+        Revy, your strength inspires everyone around you, and your hard work truly shines.  
+        You deserve all the happiness, love, and success in the world 💕  
+        <br><br>
+
+        Keep being incredible and never forget how amazing you are 🎂
+    </p>
+    <button onclick="closePopup()">Close 💌</button>
+</div>
+
+<script>
+function surprise() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("music").play();
+
+    for (let i = 0; i < 100; i++) createConfetti();
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+// Confetti
+function createConfetti() {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.backgroundColor =
+        ["#ff66b2", "#ffccff", "#ffffff", "#ff99cc"][Math.floor(Math.random() * 4)];
+
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+}
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (Math.random() * 18 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
